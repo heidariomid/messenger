@@ -2,6 +2,7 @@ import './globals.css';
 import {vazirFont, estedadFont} from '@/constants/localFonts';
 import SessionProvider from '../provider/SessionProvider';
 import ReduxProvider from '../provider/ReduxProvider';
+import ReacrQueryProvider from '../provider/ReactQueryProvider';
 import {getServerSession} from 'next-auth';
 import ToasterContext from '@/app/context/ToasterContext';
 import Home from './page';
@@ -17,12 +18,14 @@ export default async function RootLayout({children}: {children: React.ReactNode}
 		<html lang='fa' dir='rtl'>
 			<body className={`${vazirFont.className} ${vazirFont.variable} ${estedadFont.variable}  `}>
 				<ToasterContext />
-				<ReduxProvider>
-					<SessionProvider session={session}>
-						<Header />
-						{children}
-					</SessionProvider>
-				</ReduxProvider>
+				<ReacrQueryProvider>
+					<ReduxProvider>
+						<SessionProvider session={session}>
+							<Header />
+							{children}
+						</SessionProvider>
+					</ReduxProvider>
+				</ReacrQueryProvider>
 			</body>
 		</html>
 	);

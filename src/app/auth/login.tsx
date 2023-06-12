@@ -1,6 +1,5 @@
 'use client';
 import {FieldValues, SubmitHandler, useForm} from 'react-hook-form';
-import {ArrowPathIcon} from '@heroicons/react/24/solid';
 import ErrorBtn from '@/components/Buttons/ErrorBtn';
 import {useEffect, useState} from 'react';
 import APPBtn from '@/components/Buttons/SubmitBtn';
@@ -8,7 +7,9 @@ import {useRouter} from 'next/navigation';
 import {useSession} from 'next-auth/react';
 import {toast} from 'react-hot-toast';
 import APPInput from '@/components/Inputs/Input';
-import http from '@/services/httpService';
+import {useMutation} from '@tanstack/react-query';
+import {getOtp} from '@/services/authServices';
+import Loading from '@/components/Loading';
 
 type Variant = 'login' | 'signup';
 const AuthForm = () => {
@@ -16,6 +17,7 @@ const AuthForm = () => {
 	const session = useSession();
 	const [variant, setVariant] = useState<Variant>('login');
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const {mutateAsync} = useMutation({mutationFn: getOtp});
 	useEffect(() => {
 		if (session?.status === 'authenticated') {
 			router.push('/conversations');
@@ -33,7 +35,6 @@ const AuthForm = () => {
 		getValues,
 		formState: {errors},
 		handleSubmit,
-		setError,
 		clearErrors,
 		reset,
 	} = useForm<FieldValues>({
@@ -48,10 +49,9 @@ const AuthForm = () => {
 		setIsLoading(true);
 		const {phoneNumber} = getValues();
 		try {
-			const res = await http.post('/user/get-otp', {phoneNumber});
-			if (res.status === 200) {
-				const {data} = res?.data;
-				toast.success(data.message);
+			const {data, status} = await mutateAsync(phoneNumber);
+			if (status === 200) {
+				toast.success(data.data.message);
 				router.push('/');
 			}
 		} catch (error) {
@@ -64,11 +64,7 @@ const AuthForm = () => {
 		minLength: {value: 0, message: 'phoneNumber must be more than 0 charachter'},
 	};
 
-	const nameRegister = {
-		required: {value: true, message: 'name could not be empty'},
-	};
 	const clearEmailErrors = () => clearErrors('phoneNumber');
-	const clearNameErrors = () => clearErrors('password');
 	return (
 		<div className='container flex flex-col mx-auto h-full items-center justify-center'>
 			<div className='w-full max-w-screen-sm flex flex-col items-center py-10 px-5 text-center '>
@@ -84,21 +80,6 @@ const AuthForm = () => {
 				<h3 className={`font-bold text-lg text-secondary-500  text-right pr-10 w-full   `}>خوش آمدید</h3>
 				<div className='w-[400px]'>
 					<form className='flex flex-col w-full mt-5 px-10 ' onSubmit={handleSubmit(onSubmit)}>
-						{variant === 'signup' && (
-							<>
-								<APPInput
-									id='1'
-									placeholder='name'
-									name={'name'}
-									register={register}
-									registerName={nameRegister}
-									errors={errors}
-									onKeyDown={clearNameErrors}
-									disabled={isLoading}
-									type='text'
-								/>
-							</>
-						)}
 						<APPInput
 							id='2'
 							placeholder='شماره موبایل'
@@ -115,16 +96,7 @@ const AuthForm = () => {
 							<APPBtn type='submit' disabled={isLoading} fullWidth>
 								{variant === 'login' && !isLoading && 'ورود'}
 								{variant === 'signup' && !isLoading && 'Register'}
-								{isLoading && (
-									<div className='flex flex-row  w-full  justify-between'>
-										<div className='flex flex-row mx-auto gap-x-3'>
-											<span className='text-white '>Loading</span>
-											<div>
-												<ArrowPathIcon className=' animate-spin  w-5 h-5 absolute  text-green-200' />
-											</div>
-										</div>
-									</div>
-								)}
+								{isLoading && <Loading />}
 							</APPBtn>
 						</div>
 					</form>
