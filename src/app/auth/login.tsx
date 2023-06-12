@@ -49,9 +49,9 @@ const AuthForm = () => {
 		setIsLoading(true);
 		const {phoneNumber} = getValues();
 		try {
-			const {data, status} = await mutateAsync(phoneNumber);
-			if (status === 200) {
-				toast.success(data.data.message);
+			const {data} = await mutateAsync(phoneNumber);
+			if (data?.statusCode === 200) {
+				toast.success(data.message);
 				router.push('/');
 			}
 		} catch (error) {
