@@ -3,8 +3,9 @@ import {vazirFont, estedadFont} from '@/constants/localFonts';
 import SessionProvider from '../provider/SessionProvider';
 import ReduxProvider from '../provider/ReduxProvider';
 import {getServerSession} from 'next-auth';
-import Login from './auth/page';
 import ToasterContext from '@/app/context/ToasterContext';
+import Home from './page';
+import Header from './Header';
 
 export const metadata = {
 	title: 'Luxoré',
@@ -14,10 +15,13 @@ export default async function RootLayout({children}: {children: React.ReactNode}
 	const session = await getServerSession();
 	return (
 		<html lang='fa' dir='rtl'>
-			<body className={`${vazirFont.className} ${vazirFont.variable} ${estedadFont.variable} bg-secondary-50 `}>
+			<body className={`${vazirFont.className} ${vazirFont.variable} ${estedadFont.variable}  `}>
 				<ToasterContext />
 				<ReduxProvider>
-					<SessionProvider session={session}>{!session ? <Login /> : <>{children}</>}</SessionProvider>
+					<SessionProvider session={session}>
+						<Header />
+						{children}
+					</SessionProvider>
 				</ReduxProvider>
 			</body>
 		</html>

@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const auth = () => {
 	return (
-		<div className=' flex flex-col py-12 mx-auto w-full min-h-screen justify-center  '>
+		<div className=' flex flex-col  mx-auto w-full min-h-screen justify-center -mt-10  '>
 			<div className='flex justify-center items-center text-center  '>
 				<div className='mx-auto flex flex-col self-center gap-5 '>
 					<Link className='cursor-pointer  ' href='/'>
@@ -13,7 +13,7 @@ const auth = () => {
 							<h1 className='text-6xl bg-black-400 font-bold mt-4 '>
 								<ShoppingBagIcon className='h-16 w-16  text-secondary-400 text-end ' />
 								<span className='font-extrabold inline-flex bg-secondary-400 px-4 py-3 -mr-2 text-primary-50 font-estedad  rounded-2xl'>
-									فروشاپ
+									دلیورو
 								</span>
 							</h1>
 						</div>
