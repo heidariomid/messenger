@@ -17,10 +17,10 @@ const AuthForm = () => {
 	const session = useSession();
 	const [variant, setVariant] = useState<Variant>('login');
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const {mutateAsync} = useMutation({mutationFn: getOtp});
+	const {data, mutateAsync: getOtpAsync} = useMutation({mutationFn: getOtp});
 	useEffect(() => {
 		if (session?.status === 'authenticated') {
-			router.push('/conversations');
+			router.push('/');
 		}
 	}, [session?.status, router]);
 	const toggleVariant = () => {
@@ -49,13 +49,14 @@ const AuthForm = () => {
 		setIsLoading(true);
 		const {phoneNumber} = getValues();
 		try {
-			const {data} = await mutateAsync(phoneNumber);
-			if (data?.statusCode === 200) {
+			const {data, status} = await getOtpAsync({phoneNumber});
+			if (status === 200) {
 				toast.success(data.message);
-				router.push('/');
+				localStorage.setItem('phoneNumber', phoneNumber);
+				router.push('/auth/check-otp');
 			}
-		} catch (error) {
-			toast.error(' something went wrong ');
+		} catch (error: any) {
+			toast.error(error?.response?.data?.message);
 		}
 	};
 
@@ -95,18 +96,20 @@ const AuthForm = () => {
 						<div className='mt-5'>
 							<APPBtn type='submit' disabled={isLoading} fullWidth>
 								{variant === 'login' && !isLoading && 'ورود'}
-								{variant === 'signup' && !isLoading && 'Register'}
+								{variant === 'signup' && !isLoading && 'ثبت نام'}
 								{isLoading && <Loading />}
 							</APPBtn>
 						</div>
 					</form>
 				</div>
-				<div className='mt-8'>
-					<span className=' font-medium ml-4 '>{variant === 'login' ? '  کاربر جدید؟' : 'حساب کاربری دارید؟'}</span>
-					<button className='pl-2  font-medium hover:underline text-primary-800' onClick={toggleVariant}>
-						{variant === 'login' ? '  ثبت نام کنید ' : 'ورود'}
-					</button>
-				</div>
+				{false && (
+					<div className='mt-8'>
+						<span className=' font-medium ml-4 '>{variant === 'login' ? '  کاربر جدید؟' : 'حساب کاربری دارید؟'}</span>
+						<button className='pl-2  font-medium hover:underline text-primary-800' onClick={toggleVariant}>
+							{variant === 'login' ? '  ثبت نام کنید ' : 'ورود'}
+						</button>
+					</div>
+				)}
 			</div>
 		</div>
 	);

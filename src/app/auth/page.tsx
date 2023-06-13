@@ -1,7 +1,10 @@
-import React from 'react';
+'use client';
+
+import React, {useState} from 'react';
 import Login from './login';
 import {ShoppingBagIcon} from '@heroicons/react/24/solid';
 import Link from 'next/link';
+import CheckOTP from '@/components/OTP/CheckOTP';
 
 const auth = () => {
 	return (

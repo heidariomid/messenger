@@ -35,7 +35,9 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/provider/ReactQueryProvider.jsx",
-    "src/provider/ReactQueryProvider.jsx"
+    "src/provider/ReactQueryProvider.jsx",
+    "src/services/authServices.ts",
+    "src/services/authServices.ts"
   ],
   "exclude": [
     "node_modules"

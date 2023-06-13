@@ -4,7 +4,7 @@ import SessionProvider from '../provider/SessionProvider';
 import ReduxProvider from '../provider/ReduxProvider';
 import ReacrQueryProvider from '../provider/ReactQueryProvider';
 import {getServerSession} from 'next-auth';
-import ToasterContext from '@/app/context/ToasterContext';
+import ToasterContext from '@/context/ToasterContext';
 import Home from './page';
 import Header from './Header';
 

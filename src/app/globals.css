@@ -35,13 +35,19 @@
 
 @layer components {
 	.input_field {
-		@apply w-full py-3 px-4 rounded-xl bg-secondary-50/50 text-secondary-900 border border-gray-100 outline-none duration-200 transition-all ease-in-out hover:border-primary-300 focus:outline-none focus:border-primary-300 focus:shadow-input-focus focus:bg-white;
+		@apply w-full shadow-sm py-3 px-4 rounded-xl bg-primary-50/40 text-secondary-900 border border-secondary-50/50 outline-none duration-200 transition-all ease-in-out hover:border-primary-300 focus:outline-none focus:border-primary-300 focus:shadow-input-focus focus:bg-white;
 	}
 	.btn {
 		@apply px-2 py-1 font-bold rounded-lg transition-all duration-300;
 	}
 	.btn--primary {
 		@apply px-4 py-3 bg-primary-900 text-white hover:bg-primary-800 shadow-lg shadow-primary-300;
+	}
+	.btn--secondary {
+		@apply px-4 py-3 bg-secondary-900 text-white hover:bg-secondary-800 shadow-lg shadow-secondary-300;
+	}
+	.btn--loading {
+		@apply px-4 py-3 bg-secondary-500 text-white hover:bg-secondary-100 shadow-lg shadow-secondary-50;
 	}
 	.table__th {
 		@apply border-b-2 border-b-gray-500 font-medium p-3 pr-8 pb-3 text-right;
