@@ -15,8 +15,8 @@ interface Props {
 function CheckOTP({otpResponse, onSubmit, otp, setOtp, onBack, time, onResendOtp, isCechkingOtp}: Props) {
 	return (
 		<div>
-			<button onClick={onBack} className='mb-4'>
-				<HiArrowNarrowRight className='w-6 h-6 text-secondary-500' />
+			<button onClick={onBack} className='mb-6 flex w-full items-center justify-center '>
+				<HiArrowNarrowRight className='w-6 h-6 text-secondary-500 ml-2' /> ویرایش شماره موبایل
 			</button>
 			{otpResponse && (
 				<p>
@@ -27,8 +27,8 @@ function CheckOTP({otpResponse, onSubmit, otp, setOtp, onBack, time, onResendOtp
 				</p>
 			)}
 
-			<form className='space-y-10 ' onSubmit={onSubmit}>
-				<p className='font-bold'>کد تایید را وارد کنید</p>
+			<form className='space-y-10  ' onSubmit={onSubmit}>
+				<p className='font-bold '>کد تایید را وارد کنید</p>
 				<OTPInput
 					value={otp}
 					onChange={setOtp}

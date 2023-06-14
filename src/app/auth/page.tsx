@@ -14,10 +14,8 @@ const auth = () => {
 					<Link className='cursor-pointer  ' href='/'>
 						<div className='flex flex-col justify-center items-center '>
 							<h1 className='text-6xl bg-black-400 font-bold mt-4 '>
-								<ShoppingBagIcon className='h-16 w-16  text-secondary-400 text-end ' />
-								<span className='font-extrabold inline-flex bg-secondary-400 px-4 py-3 -mr-2 text-primary-50 font-estedad  rounded-2xl'>
-									دلیورو
-								</span>
+								<ShoppingBagIcon className='h-16 w-16  text-primary-400 text-end ' />
+								<span className='font-extrabold inline-flex bg-primary-400 px-4 py-3 -mr-2 text-white font-estedad  rounded-2xl'>iShop</span>
 							</h1>
 						</div>
 					</Link>

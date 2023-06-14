@@ -24,7 +24,7 @@ const SubmitBtn: React.FC<ButtonProps> = ({type = 'button', fullWidth, children,
 				fullWidth && 'w-full',
 				secondary ? 'text-gray-900' : 'text-white',
 				danger && 'bg-rose-500 hover:bg-rose-600 focus-visible:outline-red-600',
-				!secondary && !danger && 'bg-secondary-400 hover:bg-secondary-600 focus-visible:outline-secondary-600',
+				!secondary && !danger && 'bg-primary-400 hover:bg-primary-600 focus-visible:outline-primary-600',
 			)}
 		>
 			{children}

@@ -6,6 +6,7 @@ import {FieldValues, SubmitHandler, useForm} from 'react-hook-form';
 import {toast} from 'react-hot-toast';
 import {useRouter} from 'next/navigation';
 import {useEffect, useState} from 'react';
+import {set} from 'lodash';
 
 const Otp = () => {
 	let TIME_TO_RESEND_OTP_CODE = 60000;
@@ -34,6 +35,7 @@ const Otp = () => {
 	const onResendOtp = () => {
 		setTime(TIME_TO_RESEND_OTP_CODE);
 		getOtpAsync({phoneNumber});
+		setOtp('');
 	};
 	const onSubmit: SubmitHandler<FieldValues> = async (e) => {
 		e.preventDefault();
