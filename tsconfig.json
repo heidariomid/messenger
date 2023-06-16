@@ -37,7 +37,9 @@
     "src/provider/ReactQueryProvider.jsx",
     "src/provider/ReactQueryProvider.jsx",
     "src/services/authServices.ts",
-    "src/services/authServices.ts"
+    "src/services/authServices.ts",
+    "src/services/userServices.tsx",
+    "src/services/userServices.tsx"
   ],
   "exclude": [
     "node_modules"

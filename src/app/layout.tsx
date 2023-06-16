@@ -22,7 +22,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
 					<ReduxProvider>
 						<SessionProvider session={session}>
 							<Header />
-							{children}
+							<div className='w-full mx-auto flex justify-center items-center h-screen '>{children}</div>
 						</SessionProvider>
 					</ReduxProvider>
 				</ReacrQueryProvider>

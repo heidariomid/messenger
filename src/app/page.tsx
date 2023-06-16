@@ -1,13 +1,11 @@
 'use client';
 
+import {useUser} from '@/hooks/useUser';
+import Dashboard from './dashboard/page';
+
 const Home = () => {
-	return (
-		<div className='bg-white h-screen '>
-			<div className='px-4 py-5 sm:p-6'>
-				<h1>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</h1>
-			</div>
-		</div>
-	);
+	const {user} = useUser();
+	return <>{user ? <Dashboard user={user} /> : <div>Home</div>}</>;
 };
 
 export default Home;
