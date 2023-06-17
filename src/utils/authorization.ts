@@ -2,10 +2,13 @@ import {IUser} from '@/Interface/IUser';
 import {NextRequest} from 'next/server';
 
 export const getUserFromCookie = async (request: NextRequest) => {
+	let strCookie = '';
+	request.cookies.getAll().forEach((item) => {
+		strCookie += `${item?.name}=${item?.value};`;
+	});
 	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/profile`, {
 		headers: {
-			'Content-Type': 'application/json',
-			'Cookie': request.headers.get('cookie') || '',
+			Cookie: strCookie,
 		},
 		credentials: 'include',
 	});

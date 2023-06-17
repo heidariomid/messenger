@@ -1,13 +1,14 @@
 'use client';
 
+import {IUser} from '@/Interface/IUser';
 import {useUser} from '@/hooks/useUser';
 import Link from 'next/link';
 
 const Header = () => {
-	const {user, isLoading} = useUser();
-	const cartLength = () => user?.cart?.products?.reduce((acc, curr) => acc + curr.quantity, 0);
+	const {user, isLoading}: {user: IUser | null | undefined; isLoading: boolean} = useUser();
+	const cartLength = () => user?.cart?.products?.reduce((acc, curr) => acc + curr.quantity, 0) || 0;
 	return (
-		<header className={`shadow-md  ${isLoading ? 'opacity-0' : 'opacity-100'} `}>
+		<header className={`shadow-md opacity-100 `}>
 			<nav>
 				<ul className='container flex  justify-between py-2 xl:max-w-screen-xl '>
 					{user && (

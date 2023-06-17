@@ -9,7 +9,12 @@ export const useUser = () => {
 		queryFn: getUserProfile,
 	});
 	const user: IUser = data?.user;
-
+	if (!user) {
+		return {
+			user: null,
+			isLoading,
+		};
+	}
 	return {
 		user,
 		isLoading,
