@@ -9,8 +9,8 @@ import Home from './page';
 import Header from './Header';
 
 export const metadata = {
-	title: 'Luxoré',
-	description: 'super fast and minimal E-commerce web app',
+	title: 'خرید از آمازون',
+	description: 'خرید از سایت های جهانی',
 };
 export default async function RootLayout({children}: {children: React.ReactNode}) {
 	const session = await getServerSession();
